@@ -10,6 +10,10 @@
 
     <div class="example-wrapper">
         <a href="{{ path('admin.app_admin') }}">Админ-панель</a>
+        {{ form_start(form, {attr: {"class": "d-inline"}}) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Найти</button>
+        {{ form_end(form) }}
         {% for article in articles %}
             <article>
                 <h2>{{ article.title }}</h2>
@@ -21,6 +25,10 @@
                     Дата создания: {{ article.createdAt|date('d.m.Y H:i:s')}}, Автор: {{ article.author }}
                 </div>
             </article>
+
+        {% else %}
+            По вашему запросу ничего не найдено :(
         {% endfor %}
+        {{ pagerfanta(articles) }}
     </div>
 {% endblock %}
